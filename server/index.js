@@ -10,14 +10,26 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // init restaurants datas
-data = require('./restaurants.json');
-var restaurants = data; 
+const data_restaurants = require('./restaurants.json');
+var restaurants = data_restaurants;
+
+//init pagination default
+const resultsPerPage = 5;
 
 // routage
     
-app.get("/api/restaurants", (req, res, next) => { //retrieve all restaurants
-    console.log("[GET] restaurants");
-    res.json(restaurants);
+app.get("/api/restaurants", (req, res, next) => { //retrieve all restaurant
+    var page = req.query.page;
+    console.log("[GET] restaurants?page="+page);
+    if(typeof page !== "undefined"){
+        var startIndex = page*resultsPerPage;
+        var endIndex = startIndex+resultsPerPage+1;
+        restaurantsResults = restaurants.slice(startIndex,endIndex);
+        res.json(restaurantsResults);
+    }
+    else{
+        res.json(restaurants);
+    }
 });
 
 app.post("/api/restaurant", (req,res) => { //create a restaurant
