@@ -24,11 +24,11 @@ restaurants.push(
 
 // routage
     
-app.get("/restaurants", (req, res, next) => { //retrieve all restaurants
+app.get("/api/restaurants", (req, res, next) => { //retrieve all restaurants
     res.json(restaurants);
 });
 
-app.post("/restaurant", (req,res) => { //create a restaurant
+app.post("/api/restaurant", (req,res) => { //create a restaurant
     try{
         var r_nom = req.body.nom;
         var r_cuisine = req.body.cuisine;
@@ -46,6 +46,44 @@ app.post("/restaurant", (req,res) => { //create a restaurant
     }
 });
 
+app.put("/api/restaurant/:id",(req,res) => {
+    var id = req.params.id;
+
+    if(id>=0 && id <restaurants.length){
+        var restaurant_selected = restaurants[id];
+        var r_nom = req.body.nom;
+        var r_cuisine = req.body.cuisine;
+        var log = "";
+
+        if(typeof r_nom !== "undefined"){
+            restaurant_selected.nom = r_nom;
+            log = log + " nom updated, new value : "+r_nom;
+        }
+        if(typeof r_nom !== "undefined"){
+            restaurant_selected.cuisine = r_cuisine;
+            log = log + " cuisine updated, new value : "+r_cuisine;
+        }
+        console.log("[PUT-UPDATE] restaurant id "+id+" -> "+log);
+        res.end("OK");
+    }
+    else{
+        res.end("ERROR : ID not valid : must be between "+restaurants.length);
+    }
+});
+
+app.delete("/api/restaurant/:id",(req,res) => {
+    var id = req.params.id;
+    if(id>=0 && id <restaurants.length){
+        var restaurant_selected = restaurants[id];
+        restaurants.splice(id,1);
+        console.log("[DELETE] restaurant id "+id);
+        res.end("OK");
+    }
+    else{
+        res.end("ERROR : ID not valid : must be between "+restaurants.length);
+    }
+
+});
 
 
 // start server
