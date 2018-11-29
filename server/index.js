@@ -21,20 +21,27 @@ const resultsPerPage = 5;
 app.get("/api/restaurants", (req, res, next) => { //retrieve all restaurant
     var page = req.query.page;
     if(typeof page !== "undefined"){
+        var maxpage = (restaurants.length/resultsPerPage|0);
         if(page == "first"){
             page = 0;
         }
         else if(page == "last"){
-            page = (restaurants.length/resultsPerPage|0);
+            page = maxpage;
         }
-        
-        let startIndex = page*resultsPerPage;
-        let endIndex = startIndex+resultsPerPage+1;
-        restaurantsResults = restaurants.slice(startIndex,endIndex);
-        res.json(restaurantsResults);
+
+        if((page <= maxpage) && (page >= 0)){
+            let startIndex = page*resultsPerPage;
+            let endIndex = startIndex+resultsPerPage+1;
+            restaurantsResults = restaurants.slice(startIndex,endIndex);
+            res.json(restaurantsResults);
+        }
+        else{
+            res.end("Error : incorrect page" );
+            return;
+        }
     }
 
-    else{
+    else {
         res.json(restaurants);
     }
     console.log("[GET] restaurants?page="+page);
