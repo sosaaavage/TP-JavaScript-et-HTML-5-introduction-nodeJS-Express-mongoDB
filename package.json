@@ -1,0 +1,14 @@
+{
+  "name": "apitp",
+  "version": "1.0.0",
+  "description": "Master 1 MIAGE : Frameworks JavaScript -> TP1 : Introduction nodeJS/express/mongoDB ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Anthony Gomez",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
