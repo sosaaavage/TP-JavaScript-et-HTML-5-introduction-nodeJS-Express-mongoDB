@@ -9,30 +9,6 @@ var app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// routage
-    
-app.get("/api", (req, res, next) => { //return all restaurants
-    res.json(restaurants);
-});
-
-app.post("/api", (req,res) => {
-    var r_nom = req.query.nom;
-    var r_cuisine = req.query.cuisine;
-    
-    try{
-        restaurants.push(
-            {
-                nom: r_nom,
-                cuisine: r_cuisine
-            }
-        );
-        res.end("OK");
-    }
-    catch(e){
-        res.end("ERROR "+e);
-    }
-});
-
 // init restaurants datas
 var restaurants = [];
 restaurants.push(
@@ -45,6 +21,32 @@ restaurants.push(
         cuisine: 'Américaine'
     }
 );
+
+// routage
+    
+app.get("/restaurants", (req, res, next) => { //retrieve all restaurants
+    res.json(restaurants);
+});
+
+app.post("/restaurant", (req,res) => { //create a restaurant
+    try{
+        var r_nom = req.body.nom;
+        var r_cuisine = req.body.cuisine;
+            restaurants.push(
+                {
+                    nom: r_nom,
+                    cuisine: r_cuisine
+                }
+            );
+            console.log("[POST-CREATE] restaurant : "+r_nom+" "+r_cuisine);
+            res.end("OK");
+    }
+    catch(e){
+        res.end("ERROR "+e);
+    }
+});
+
+
 
 // start server
 app.listen (port, () => { 
