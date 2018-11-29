@@ -20,16 +20,24 @@ const resultsPerPage = 5;
     
 app.get("/api/restaurants", (req, res, next) => { //retrieve all restaurant
     var page = req.query.page;
-    console.log("[GET] restaurants?page="+page);
     if(typeof page !== "undefined"){
-        var startIndex = page*resultsPerPage;
-        var endIndex = startIndex+resultsPerPage+1;
+        if(page == "first"){
+            page = 0;
+        }
+        else if(page == "last"){
+            page = (restaurants.length/resultsPerPage|0);
+        }
+        
+        let startIndex = page*resultsPerPage;
+        let endIndex = startIndex+resultsPerPage+1;
         restaurantsResults = restaurants.slice(startIndex,endIndex);
         res.json(restaurantsResults);
     }
+
     else{
         res.json(restaurants);
     }
+    console.log("[GET] restaurants?page="+page);
 });
 
 app.post("/api/restaurant", (req,res) => { //create a restaurant
