@@ -17,7 +17,27 @@ function init() {
             nom: '',
             cuisine: ''
         },
+        mounted(){
+                this.getRestaurants();
+        },
         methods: {
+            getRestaurants() {
+                let url = "http://localhost:3000/api/restaurants";
+                console.log("Je vais chercher les restaurants sur : " + url);
+                fetch(url,{mode:"no-cors"})
+                    .then((reponseJSON) => {
+                        //console.log("reponse json");
+                        return reponseJSON.json();
+                    })
+                    .then((reponseJS) => {
+                        // ici on a une réponse en JS
+                        this.restaurants = reponseJS.data;
+                        //this.nbRestaurants = reponseJS.count;
+                    })
+                    .catch((err) => {
+                        console.log("Une erreur est intervenue " + err);
+                    })
+            },
             supprimerRestaurant(index) {
                 this.restaurants.splice(index, 1);
             },
