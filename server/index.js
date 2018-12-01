@@ -31,7 +31,7 @@ app.get("/api/restaurants", (req, res, next) => { //retrieve all restaurant
 
         if((page <= maxpage) && (page >= 0)){
             let startIndex = page*resultsPerPage;
-            let endIndex = startIndex+resultsPerPage+1;
+            let endIndex = startIndex+resultsPerPage;
             restaurantsResults = restaurants.slice(startIndex,endIndex);
             res.json(restaurantsResults);
         }
@@ -51,11 +51,14 @@ app.post("/api/restaurant", (req,res) => { //create a restaurant
     try{
         var r_nom = req.body.nom;
         var r_cuisine = req.body.cuisine;
+        var r_last_id = restaurants[restaurants.length-1].id;
+        var r_id = r_last_id+1;
         if(typeof r_nom != "undefined" && r_cuisine != "undefined"){
             restaurants.push(
                 {
                     nom: r_nom,
-                    cuisine: r_cuisine
+                    cuisine: r_cuisine,
+                    id: r_id
                 }
             );
             console.log("[POST-CREATE] restaurant : "+r_nom+" "+r_cuisine);
