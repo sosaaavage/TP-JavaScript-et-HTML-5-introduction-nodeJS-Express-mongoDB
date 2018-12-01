@@ -76,22 +76,22 @@ app.post("/api/restaurant", (req,res) => { //create a restaurant
 
 app.put("/api/restaurant/:id",(req,res) => {
     var id = req.params.id;
-
-    if(id>=0 && id <restaurants.length){
+    var r_last_id = restaurants[restaurants.length-1].id;
+    if(id>=0 && id <= r_last_id){
         var restaurant_selected = restaurants[id];
         var r_nom = req.body.nom;
         var r_cuisine = req.body.cuisine;
         var log = "";
 
-        if(typeof r_nom !== "undefined"){
+        if(typeof r_nom != "undefined"){
             restaurant_selected.nom = r_nom;
             log = log + " nom updated, new value : "+r_nom;
         }
-        if(typeof r_nom !== "undefined"){
+        if(typeof r_cuisine != "undefined"){
             restaurant_selected.cuisine = r_cuisine;
             log = log + " cuisine updated, new value : "+r_cuisine;
         }
-        else if(r_nom !== "undefined" && r_cuisine !== "undefined"){
+        else if(r_nom == "undefined" && r_cuisine == "undefined"){
             res.end("ERROR : undefined values into body");
         }
         console.log("[PUT-UPDATE] restaurant id "+id+" -> "+log);
@@ -104,7 +104,8 @@ app.put("/api/restaurant/:id",(req,res) => {
 
 app.delete("/api/restaurant/:id",(req,res) => {
     var id = req.params.id;
-    if(id>=0 && id <restaurants.length){
+    var r_last_id = restaurants[restaurants.length-1].id;
+    if(id>=0 && id <= r_last_id){
         var restaurant_selected = restaurants[id];
         restaurants.splice(id,1);
         console.log("[DELETE] restaurant id "+id);
