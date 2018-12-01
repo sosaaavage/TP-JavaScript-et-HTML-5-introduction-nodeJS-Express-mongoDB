@@ -34,10 +34,22 @@
             <th>Cuisine </th>
         </tr>
         <tbody>
-            <tr v-for="r,index in restaurants" v-on:click="supprimerRestaurant(index)" v-bind:style="{backgroundColor:getColor(index)}"
+            <tr v-for="r,index in restaurants"  v-bind:style="{backgroundColor:getColor(index)}"
                 v-bind:class="{bordureRouge:(index === 2)}">
-                <td>{{r.nom}}</td>
+                <td>
+                    {{r.nom}}
+                </td>
                 <td> {{r.cuisine}}</td>
+                <td>
+                <div id="example-2">
+                    <button v-on:click="modifierRestaurant(index)">Modifier</button>
+                    </div>
+                </td> 
+                <td>
+                <div id="example-3">
+                    <button v-on:click="supprimerRestaurant(index)">Supprimer</button>
+                </div>
+                </td>     
             </tr>
         </tbody>
     </table>

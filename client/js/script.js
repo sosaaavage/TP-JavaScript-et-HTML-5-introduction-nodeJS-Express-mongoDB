@@ -18,9 +18,27 @@ function init() {
             cuisine: ''
         },
         mounted(){
+                console.log("zboub");
                 this.getRestaurants();
         },
         methods: {
+            modifierRestaurant: function (event) {
+                var h3 = document.createElement("h3");
+                var inputNom = document.createElement("input");
+                document.body.appendChild(h3);
+                h3.innerHTML ="Nom";
+                h3.appendChild(inputNom);
+                var br = document.createElement("br");
+                h3.appendChild(br);
+                h3.innerHTML +="Cuisine";
+                var inputCuisine = document.createElement("input");
+                h3.appendChild(inputCuisine);
+                var buttonSubmit = document.createElement("button");
+                buttonSubmit.innerHTML = "Valider";
+                var br = document.createElement("br");
+                h3.appendChild(br);
+                h3.appendChild(buttonSubmit);
+              },
             getRestaurants() {
                 let url = "http://localhost:3000/api/restaurants";
                 console.log("Je vais chercher les restaurants sur : " + url);
