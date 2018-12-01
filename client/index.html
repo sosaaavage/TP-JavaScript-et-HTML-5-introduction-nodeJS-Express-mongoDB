@@ -33,9 +33,19 @@
             <th>Cuisine </th>
         </tr>
         <tbody>
-            <tr v-for="r,index in restaurants" v-on:click="supprimerRestaurant(index)">
+            <tr v-for="r,index in restaurants">
                 <td>{{r.nom}}</td>
                 <td> {{r.cuisine}}</td>
+                <td>
+                <div id="example-2">
+                    <button v-on:click="modifierRestaurant(index)">Modifier</button>
+                    </div>
+                </td> 
+                <td>
+                <div id="example-3">
+                    <button v-on:click="supprimerRestaurant(index)">Supprimer</button>
+                </div>
+                </td>     
             </tr>
         </tbody>
     </table>
