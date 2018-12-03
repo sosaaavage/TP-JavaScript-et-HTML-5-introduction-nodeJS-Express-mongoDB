@@ -18,7 +18,6 @@ function init() {
             cuisine: ''
         },
         mounted(){
-                console.log("zboub");
                 this.getRestaurants();
         },
         methods: {
@@ -71,9 +70,6 @@ function init() {
                 );
                 this.nom = "";
                 this.cuisine = "";
-            },
-            getColor(index) {
-                return (index % 2) ? 'lightBlue' : 'pink';
             }
         }
     })

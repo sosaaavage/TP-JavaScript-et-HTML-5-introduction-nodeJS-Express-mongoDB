@@ -9,24 +9,26 @@
 
     <script src="js/script.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <title>Gestionnaire restaurants VueJS</title>
 </head>
 
 <body>
 <div id="app">
+    <h1><span class="badge badge-light">Gestionnaire de restaurants</span></h1>
     <form v-on:submit="ajouterRestaurant">
-        <label>
+        <h3><span class="badge badge-success"><i class="fas fa-utensils"></i> Ajouter un restaurant </span></h3>
+        <label class="badge badge-success">
             Nom : <input type="text" required v-model="nom">
         </label>
-        <label>
+        <label class="badge badge-success">
             Cuisine : <input type="text" required v-model="cuisine">
         </label>
 
-        <button class="btn btn-success">Ajouter</button>
+        <button class="btn btn-success"><i class="fas fa-plus"></i></button>
     </form>
 
-    <h1>Nombre de restaurants : {{restaurants.length}}</h1>
+    <h4><span class="badge badge-light">{{restaurants.length}} restaurants référencés</span></h4>
     <table class="table table-dark">
         <tr>
             <th>Nom</th>
@@ -38,12 +40,12 @@
                 <td> {{r.cuisine}}</td>
                 <td>
                 <div id="example-2">
-                    <button v-on:click="modifierRestaurant(index)">Modifier</button>
+                    <button v-on:click="modifierRestaurant(index)"><i class="fas fa-edit"></i></button>
                     </div>
                 </td> 
                 <td>
                 <div id="example-3">
-                    <button v-on:click="supprimerRestaurant(index)">Supprimer</button>
+                    <button v-on:click="supprimerRestaurant(index)"><i class="fas fa-trash"></i></button>
                 </div>
                 </td>     
             </tr>
